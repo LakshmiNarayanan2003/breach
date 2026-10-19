@@ -25,7 +25,7 @@ The API denied creating the Pages site with HTTP 403: `Resource not accessible b
 
 **Required external action:** a repository administrator must open Settings → Pages and select GitHub Actions as the source (or grant the installed integration Administration: write and Pages: write). Once Pages is enabled, rerun the deployment workflow. Network-domain review alone cannot fix an integration-permission denial.
 
-The final handoff records the source push and workflow results. The intended public URL returned HTTP 404 before publication; no live release is claimed until actual deployed game assets are checked.
+Source commit `1b4ab17e9ebeca49ef7c13185fd0a0d7254be1c9` was successfully pushed to `master`. GitHub queued the Validate and deploy BREACH workflow (run 39317257467). The final handoff records the completed workflow result. The intended public URL returned HTTP 404 before publication; no live release is claimed until actual deployed game assets are checked.
 
 ## Repository branding
 

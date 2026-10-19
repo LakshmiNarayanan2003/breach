@@ -1,0 +1,66 @@
+
+> breach@1.0.0 typecheck
+> tsc --noEmit
+
+
+> breach@1.0.0 lint
+> eslint .
+
+
+> breach@1.0.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /workspace/breach
+
+
+ Test Files  3 passed (3)
+      Tests  79 passed (79)
+   Start at  20:07:29
+   Duration  1.12s (tests 91%, import 5%, transform 3%, worker 1%)
+
+
+> breach@1.0.0 build
+> npm run typecheck && vite build
+
+
+> breach@1.0.0 typecheck
+> tsc --noEmit
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 14 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.57 kB │ gzip:   0.76 kB
+dist/assets/index-DQFNVMtq.css   20.67 kB │ gzip:   5.50 kB
+dist/assets/index-Ch62QGWC.js   598.01 kB │ gzip: 161.98 kB
+✓ built in 1.45s
+
+> breach@1.0.0 test:e2e
+> playwright test
+
+[WebServer] (node:8962) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 14 tests using 1 worker
+
+(node:8980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/game.spec.ts:61:1 › menu renders genuine 3D, all arenas load, and compact layout is usable (8.0s)
+  ✓   2 tests/e2e/game.spec.ts:82:1 › keyboard movement, mouse fire, switching, equipment, and pause work (6.4s)
+  ✓   3 tests/e2e/game.spec.ts:122:1 › actual combat kills a hostile and emits pistol and hit sounds (9.3s)
+  ✓   4 tests/e2e/game.spec.ts:140:1 › local co-op has simultaneous controls, independent ammo, and revival (7.6s)
+  ✓   5 tests/e2e/game.spec.ts:170:1 › mission-driven theft fails an operation and restart resets the world (6.2s)
+  ✓   6 tests/e2e/game.spec.ts:184:1 › all six operations complete through their final objective gates and persist (10.7s)
+  ✓   7 tests/e2e/game.spec.ts:212:1 › deathmatch respawns players, scores five eliminations, and rematches (4.8s)
+  ✓   8 tests/e2e/game.spec.ts:228:1 › volume, mute, graphics and remapped controls persist without conflicts (8.7s)
+  ✓   9 tests/e2e/game.spec.ts:250:1 › all bundled audio URLs decode and produce non-silent offline output under /breach/ (5.9s)
+  ✓  10 tests/e2e/game.spec.ts:285:1 › audio unlock, output, live mixing, dynamic music, crossfade and voice cleanup (8.3s)
+  ✓  11 tests/e2e/game.spec.ts:335:1 › weapons dispatch their distinct decoded audio, explosions chain, and switching never fires (4.7s)
+  ✓  12 tests/e2e/game.spec.ts:386:1 › captures real active combat, co-op, and remaining landmark arenas (13.4s)
+  ✓  13 tests/e2e/game.spec.ts:416:1 › campaign locks, real unlocks, upgrades, and veteran cosmetic persist (8.9s)
+  ✓  14 tests/e2e/game.spec.ts:450:1 › restarts dispose labels, pause filters music, and the audio context suspends and resumes (8.6s)
+
+  14 passed (1.9m)
+found 0 vulnerabilities
