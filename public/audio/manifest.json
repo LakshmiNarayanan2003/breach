@@ -1,0 +1,994 @@
+{
+  "pistol": {
+    "file": "audio/weapons/pistol.wav",
+    "category": "weapons",
+    "duration": 0.24,
+    "loop": false,
+    "peak": 1.176,
+    "license": "CC0-1.0"
+  },
+  "smg": {
+    "file": "audio/weapons/smg.wav",
+    "category": "weapons",
+    "duration": 0.12,
+    "loop": false,
+    "peak": 0.8843,
+    "license": "CC0-1.0"
+  },
+  "shotgun": {
+    "file": "audio/weapons/shotgun.wav",
+    "category": "weapons",
+    "duration": 0.65,
+    "loop": false,
+    "peak": 1.2725,
+    "license": "CC0-1.0"
+  },
+  "rocket": {
+    "file": "audio/weapons/rocket.wav",
+    "category": "weapons",
+    "duration": 0.9,
+    "loop": false,
+    "peak": 1.0019,
+    "license": "CC0-1.0"
+  },
+  "railgun": {
+    "file": "audio/weapons/railgun.wav",
+    "category": "weapons",
+    "duration": 0.65,
+    "loop": false,
+    "peak": 0.9736,
+    "license": "CC0-1.0"
+  },
+  "barrel": {
+    "file": "audio/weapons/barrel.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.8099,
+    "license": "CC0-1.0"
+  },
+  "grenade": {
+    "file": "audio/weapons/grenade.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.6523,
+    "license": "CC0-1.0"
+  },
+  "barricade": {
+    "file": "audio/weapons/barricade.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.762,
+    "license": "CC0-1.0"
+  },
+  "mine": {
+    "file": "audio/weapons/mine.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.6994,
+    "license": "CC0-1.0"
+  },
+  "remote": {
+    "file": "audio/weapons/remote.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7156,
+    "license": "CC0-1.0"
+  },
+  "remote-trigger": {
+    "file": "audio/weapons/remote-trigger.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.6659,
+    "license": "CC0-1.0"
+  },
+  "mine-trigger": {
+    "file": "audio/weapons/mine-trigger.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7696,
+    "license": "CC0-1.0"
+  },
+  "grenade-bounce": {
+    "file": "audio/weapons/grenade-bounce.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7275,
+    "license": "CC0-1.0"
+  },
+  "barrel-hit": {
+    "file": "audio/weapons/barrel-hit.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7362,
+    "license": "CC0-1.0"
+  },
+  "barricade-hit": {
+    "file": "audio/weapons/barricade-hit.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7612,
+    "license": "CC0-1.0"
+  },
+  "barricade-break": {
+    "file": "audio/weapons/barricade-break.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7814,
+    "license": "CC0-1.0"
+  },
+  "weapon-switch": {
+    "file": "audio/weapons/weapon-switch.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7086,
+    "license": "CC0-1.0"
+  },
+  "empty": {
+    "file": "audio/weapons/empty.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.752,
+    "license": "CC0-1.0"
+  },
+  "upgrade": {
+    "file": "audio/weapons/upgrade.wav",
+    "category": "weapons",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7786,
+    "license": "CC0-1.0"
+  },
+  "explosion": {
+    "file": "audio/weapons/explosion.wav",
+    "category": "weapons",
+    "duration": 2.0,
+    "loop": false,
+    "peak": 1.0622,
+    "license": "CC0-1.0"
+  },
+  "impact-stone": {
+    "file": "audio/weapons/impact-stone.wav",
+    "category": "weapons",
+    "duration": 0.15,
+    "loop": false,
+    "peak": 0.984,
+    "license": "CC0-1.0"
+  },
+  "impact-wood": {
+    "file": "audio/weapons/impact-wood.wav",
+    "category": "weapons",
+    "duration": 0.15,
+    "loop": false,
+    "peak": 0.7842,
+    "license": "CC0-1.0"
+  },
+  "impact-metal": {
+    "file": "audio/weapons/impact-metal.wav",
+    "category": "weapons",
+    "duration": 0.15,
+    "loop": false,
+    "peak": 0.9727,
+    "license": "CC0-1.0"
+  },
+  "impact-ground": {
+    "file": "audio/weapons/impact-ground.wav",
+    "category": "weapons",
+    "duration": 0.15,
+    "loop": false,
+    "peak": 0.9708,
+    "license": "CC0-1.0"
+  },
+  "impact-water": {
+    "file": "audio/weapons/impact-water.wav",
+    "category": "weapons",
+    "duration": 0.15,
+    "loop": false,
+    "peak": 0.9718,
+    "license": "CC0-1.0"
+  },
+  "walker-spawn": {
+    "file": "audio/enemies/walker-spawn.wav",
+    "category": "enemies",
+    "duration": 0.22,
+    "loop": false,
+    "peak": 0.7392,
+    "license": "CC0-1.0"
+  },
+  "walker-idle": {
+    "file": "audio/enemies/walker-idle.wav",
+    "category": "enemies",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7928,
+    "license": "CC0-1.0"
+  },
+  "walker-attack": {
+    "file": "audio/enemies/walker-attack.wav",
+    "category": "enemies",
+    "duration": 0.38,
+    "loop": false,
+    "peak": 0.7524,
+    "license": "CC0-1.0"
+  },
+  "walker-hit": {
+    "file": "audio/enemies/walker-hit.wav",
+    "category": "enemies",
+    "duration": 0.46,
+    "loop": false,
+    "peak": 0.636,
+    "license": "CC0-1.0"
+  },
+  "walker-death": {
+    "file": "audio/enemies/walker-death.wav",
+    "category": "enemies",
+    "duration": 0.54,
+    "loop": false,
+    "peak": 0.6735,
+    "license": "CC0-1.0"
+  },
+  "runner-spawn": {
+    "file": "audio/enemies/runner-spawn.wav",
+    "category": "enemies",
+    "duration": 0.22,
+    "loop": false,
+    "peak": 0.812,
+    "license": "CC0-1.0"
+  },
+  "runner-idle": {
+    "file": "audio/enemies/runner-idle.wav",
+    "category": "enemies",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.8264,
+    "license": "CC0-1.0"
+  },
+  "runner-attack": {
+    "file": "audio/enemies/runner-attack.wav",
+    "category": "enemies",
+    "duration": 0.38,
+    "loop": false,
+    "peak": 0.6956,
+    "license": "CC0-1.0"
+  },
+  "runner-hit": {
+    "file": "audio/enemies/runner-hit.wav",
+    "category": "enemies",
+    "duration": 0.46,
+    "loop": false,
+    "peak": 0.6096,
+    "license": "CC0-1.0"
+  },
+  "runner-death": {
+    "file": "audio/enemies/runner-death.wav",
+    "category": "enemies",
+    "duration": 0.54,
+    "loop": false,
+    "peak": 0.6623,
+    "license": "CC0-1.0"
+  },
+  "brute-spawn": {
+    "file": "audio/enemies/brute-spawn.wav",
+    "category": "enemies",
+    "duration": 0.22,
+    "loop": false,
+    "peak": 0.5847,
+    "license": "CC0-1.0"
+  },
+  "brute-idle": {
+    "file": "audio/enemies/brute-idle.wav",
+    "category": "enemies",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.6721,
+    "license": "CC0-1.0"
+  },
+  "brute-attack": {
+    "file": "audio/enemies/brute-attack.wav",
+    "category": "enemies",
+    "duration": 0.38,
+    "loop": false,
+    "peak": 0.6731,
+    "license": "CC0-1.0"
+  },
+  "brute-hit": {
+    "file": "audio/enemies/brute-hit.wav",
+    "category": "enemies",
+    "duration": 0.46,
+    "loop": false,
+    "peak": 0.6931,
+    "license": "CC0-1.0"
+  },
+  "brute-death": {
+    "file": "audio/enemies/brute-death.wav",
+    "category": "enemies",
+    "duration": 0.54,
+    "loop": false,
+    "peak": 0.7071,
+    "license": "CC0-1.0"
+  },
+  "ranged-spawn": {
+    "file": "audio/enemies/ranged-spawn.wav",
+    "category": "enemies",
+    "duration": 0.22,
+    "loop": false,
+    "peak": 0.6352,
+    "license": "CC0-1.0"
+  },
+  "ranged-idle": {
+    "file": "audio/enemies/ranged-idle.wav",
+    "category": "enemies",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.6793,
+    "license": "CC0-1.0"
+  },
+  "ranged-attack": {
+    "file": "audio/enemies/ranged-attack.wav",
+    "category": "enemies",
+    "duration": 0.38,
+    "loop": false,
+    "peak": 0.6541,
+    "license": "CC0-1.0"
+  },
+  "ranged-hit": {
+    "file": "audio/enemies/ranged-hit.wav",
+    "category": "enemies",
+    "duration": 0.46,
+    "loop": false,
+    "peak": 0.6715,
+    "license": "CC0-1.0"
+  },
+  "ranged-death": {
+    "file": "audio/enemies/ranged-death.wav",
+    "category": "enemies",
+    "duration": 0.54,
+    "loop": false,
+    "peak": 0.6619,
+    "license": "CC0-1.0"
+  },
+  "saboteur-spawn": {
+    "file": "audio/enemies/saboteur-spawn.wav",
+    "category": "enemies",
+    "duration": 0.22,
+    "loop": false,
+    "peak": 0.6544,
+    "license": "CC0-1.0"
+  },
+  "saboteur-idle": {
+    "file": "audio/enemies/saboteur-idle.wav",
+    "category": "enemies",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.6088,
+    "license": "CC0-1.0"
+  },
+  "saboteur-attack": {
+    "file": "audio/enemies/saboteur-attack.wav",
+    "category": "enemies",
+    "duration": 0.38,
+    "loop": false,
+    "peak": 0.7165,
+    "license": "CC0-1.0"
+  },
+  "saboteur-hit": {
+    "file": "audio/enemies/saboteur-hit.wav",
+    "category": "enemies",
+    "duration": 0.46,
+    "loop": false,
+    "peak": 0.6678,
+    "license": "CC0-1.0"
+  },
+  "saboteur-death": {
+    "file": "audio/enemies/saboteur-death.wav",
+    "category": "enemies",
+    "duration": 0.54,
+    "loop": false,
+    "peak": 0.8135,
+    "license": "CC0-1.0"
+  },
+  "scavenger-spawn": {
+    "file": "audio/enemies/scavenger-spawn.wav",
+    "category": "enemies",
+    "duration": 0.22,
+    "loop": false,
+    "peak": 0.5867,
+    "license": "CC0-1.0"
+  },
+  "scavenger-idle": {
+    "file": "audio/enemies/scavenger-idle.wav",
+    "category": "enemies",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.6398,
+    "license": "CC0-1.0"
+  },
+  "scavenger-attack": {
+    "file": "audio/enemies/scavenger-attack.wav",
+    "category": "enemies",
+    "duration": 0.38,
+    "loop": false,
+    "peak": 0.6576,
+    "license": "CC0-1.0"
+  },
+  "scavenger-hit": {
+    "file": "audio/enemies/scavenger-hit.wav",
+    "category": "enemies",
+    "duration": 0.46,
+    "loop": false,
+    "peak": 0.7554,
+    "license": "CC0-1.0"
+  },
+  "scavenger-death": {
+    "file": "audio/enemies/scavenger-death.wav",
+    "category": "enemies",
+    "duration": 0.54,
+    "loop": false,
+    "peak": 0.7422,
+    "license": "CC0-1.0"
+  },
+  "guardian-spawn": {
+    "file": "audio/enemies/guardian-spawn.wav",
+    "category": "enemies",
+    "duration": 0.22,
+    "loop": false,
+    "peak": 0.7079,
+    "license": "CC0-1.0"
+  },
+  "guardian-idle": {
+    "file": "audio/enemies/guardian-idle.wav",
+    "category": "enemies",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.6491,
+    "license": "CC0-1.0"
+  },
+  "guardian-attack": {
+    "file": "audio/enemies/guardian-attack.wav",
+    "category": "enemies",
+    "duration": 0.38,
+    "loop": false,
+    "peak": 0.7948,
+    "license": "CC0-1.0"
+  },
+  "guardian-hit": {
+    "file": "audio/enemies/guardian-hit.wav",
+    "category": "enemies",
+    "duration": 0.46,
+    "loop": false,
+    "peak": 0.7157,
+    "license": "CC0-1.0"
+  },
+  "guardian-death": {
+    "file": "audio/enemies/guardian-death.wav",
+    "category": "enemies",
+    "duration": 0.54,
+    "loop": false,
+    "peak": 0.6925,
+    "license": "CC0-1.0"
+  },
+  "bomber-spawn": {
+    "file": "audio/enemies/bomber-spawn.wav",
+    "category": "enemies",
+    "duration": 0.22,
+    "loop": false,
+    "peak": 0.6338,
+    "license": "CC0-1.0"
+  },
+  "bomber-idle": {
+    "file": "audio/enemies/bomber-idle.wav",
+    "category": "enemies",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7682,
+    "license": "CC0-1.0"
+  },
+  "bomber-attack": {
+    "file": "audio/enemies/bomber-attack.wav",
+    "category": "enemies",
+    "duration": 0.38,
+    "loop": false,
+    "peak": 0.7779,
+    "license": "CC0-1.0"
+  },
+  "bomber-hit": {
+    "file": "audio/enemies/bomber-hit.wav",
+    "category": "enemies",
+    "duration": 0.46,
+    "loop": false,
+    "peak": 0.6597,
+    "license": "CC0-1.0"
+  },
+  "bomber-death": {
+    "file": "audio/enemies/bomber-death.wav",
+    "category": "enemies",
+    "duration": 0.54,
+    "loop": false,
+    "peak": 0.7168,
+    "license": "CC0-1.0"
+  },
+  "boss-spawn": {
+    "file": "audio/enemies/boss-spawn.wav",
+    "category": "enemies",
+    "duration": 0.22,
+    "loop": false,
+    "peak": 0.6741,
+    "license": "CC0-1.0"
+  },
+  "boss-idle": {
+    "file": "audio/enemies/boss-idle.wav",
+    "category": "enemies",
+    "duration": 0.3,
+    "loop": false,
+    "peak": 0.7008,
+    "license": "CC0-1.0"
+  },
+  "boss-attack": {
+    "file": "audio/enemies/boss-attack.wav",
+    "category": "enemies",
+    "duration": 0.38,
+    "loop": false,
+    "peak": 0.6227,
+    "license": "CC0-1.0"
+  },
+  "boss-hit": {
+    "file": "audio/enemies/boss-hit.wav",
+    "category": "enemies",
+    "duration": 0.46,
+    "loop": false,
+    "peak": 0.7762,
+    "license": "CC0-1.0"
+  },
+  "boss-death": {
+    "file": "audio/enemies/boss-death.wav",
+    "category": "enemies",
+    "duration": 0.54,
+    "loop": false,
+    "peak": 0.8136,
+    "license": "CC0-1.0"
+  },
+  "boss-phase": {
+    "file": "audio/enemies/boss-phase.wav",
+    "category": "enemies",
+    "duration": 1.2,
+    "loop": false,
+    "peak": 0.8222,
+    "license": "CC0-1.0"
+  },
+  "boss-defeat": {
+    "file": "audio/enemies/boss-defeat.wav",
+    "category": "enemies",
+    "duration": 1.2,
+    "loop": false,
+    "peak": 0.8657,
+    "license": "CC0-1.0"
+  },
+  "bomber-warning": {
+    "file": "audio/enemies/bomber-warning.wav",
+    "category": "enemies",
+    "duration": 1.2,
+    "loop": false,
+    "peak": 0.8524,
+    "license": "CC0-1.0"
+  },
+  "step-stone": {
+    "file": "audio/player/step-stone.wav",
+    "category": "player",
+    "duration": 0.12,
+    "loop": false,
+    "peak": 0.6521,
+    "license": "CC0-1.0"
+  },
+  "step-metal": {
+    "file": "audio/player/step-metal.wav",
+    "category": "player",
+    "duration": 0.12,
+    "loop": false,
+    "peak": 0.8276,
+    "license": "CC0-1.0"
+  },
+  "step-ground": {
+    "file": "audio/player/step-ground.wav",
+    "category": "player",
+    "duration": 0.12,
+    "loop": false,
+    "peak": 0.7004,
+    "license": "CC0-1.0"
+  },
+  "dash": {
+    "file": "audio/player/dash.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.7339,
+    "license": "CC0-1.0"
+  },
+  "player-hit": {
+    "file": "audio/player/player-hit.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.7793,
+    "license": "CC0-1.0"
+  },
+  "player-death": {
+    "file": "audio/player/player-death.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.8668,
+    "license": "CC0-1.0"
+  },
+  "low-health": {
+    "file": "audio/player/low-health.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.7308,
+    "license": "CC0-1.0"
+  },
+  "respawn": {
+    "file": "audio/player/respawn.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.8082,
+    "license": "CC0-1.0"
+  },
+  "shield-hit": {
+    "file": "audio/player/shield-hit.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.8784,
+    "license": "CC0-1.0"
+  },
+  "power-expire": {
+    "file": "audio/player/power-expire.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.7637,
+    "license": "CC0-1.0"
+  },
+  "drone": {
+    "file": "audio/player/drone.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.692,
+    "license": "CC0-1.0"
+  },
+  "pickup-health": {
+    "file": "audio/player/pickup-health.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.5224,
+    "license": "CC0-1.0"
+  },
+  "pickup-ammo": {
+    "file": "audio/player/pickup-ammo.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.5074,
+    "license": "CC0-1.0"
+  },
+  "pickup-shield": {
+    "file": "audio/player/pickup-shield.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.535,
+    "license": "CC0-1.0"
+  },
+  "pickup-damage": {
+    "file": "audio/player/pickup-damage.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.5291,
+    "license": "CC0-1.0"
+  },
+  "pickup-speed": {
+    "file": "audio/player/pickup-speed.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.5332,
+    "license": "CC0-1.0"
+  },
+  "pickup-rapid": {
+    "file": "audio/player/pickup-rapid.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.5468,
+    "license": "CC0-1.0"
+  },
+  "pickup-shockwave": {
+    "file": "audio/player/pickup-shockwave.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.5238,
+    "license": "CC0-1.0"
+  },
+  "pickup-multiplier": {
+    "file": "audio/player/pickup-multiplier.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.5163,
+    "license": "CC0-1.0"
+  },
+  "pickup-drone": {
+    "file": "audio/player/pickup-drone.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.5329,
+    "license": "CC0-1.0"
+  },
+  "pickup-equipment": {
+    "file": "audio/player/pickup-equipment.wav",
+    "category": "player",
+    "duration": 0.5,
+    "loop": false,
+    "peak": 0.5383,
+    "license": "CC0-1.0"
+  },
+  "objective-alert": {
+    "file": "audio/voice/objective-alert.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5339,
+    "license": "CC0-1.0"
+  },
+  "sabotage-start": {
+    "file": "audio/voice/sabotage-start.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5502,
+    "license": "CC0-1.0"
+  },
+  "sabotage-interrupt": {
+    "file": "audio/voice/sabotage-interrupt.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5639,
+    "license": "CC0-1.0"
+  },
+  "relay-disabled": {
+    "file": "audio/voice/relay-disabled.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5505,
+    "license": "CC0-1.0"
+  },
+  "objective-restored": {
+    "file": "audio/voice/objective-restored.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5137,
+    "license": "CC0-1.0"
+  },
+  "resource-collected": {
+    "file": "audio/voice/resource-collected.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5428,
+    "license": "CC0-1.0"
+  },
+  "resource-stolen": {
+    "file": "audio/voice/resource-stolen.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5566,
+    "license": "CC0-1.0"
+  },
+  "extraction": {
+    "file": "audio/voice/extraction.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5709,
+    "license": "CC0-1.0"
+  },
+  "wave": {
+    "file": "audio/voice/wave.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5446,
+    "license": "CC0-1.0"
+  },
+  "victory": {
+    "file": "audio/voice/victory.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5257,
+    "license": "CC0-1.0"
+  },
+  "defeat": {
+    "file": "audio/voice/defeat.wav",
+    "category": "voice",
+    "duration": 0.75,
+    "loop": false,
+    "peak": 0.5464,
+    "license": "CC0-1.0"
+  },
+  "ui-hover": {
+    "file": "audio/ui/ui-hover.wav",
+    "category": "ui",
+    "duration": 0.08,
+    "loop": false,
+    "peak": 0.4257,
+    "license": "CC0-1.0"
+  },
+  "ui-click": {
+    "file": "audio/ui/ui-click.wav",
+    "category": "ui",
+    "duration": 0.08,
+    "loop": false,
+    "peak": 0.4323,
+    "license": "CC0-1.0"
+  },
+  "ui-back": {
+    "file": "audio/ui/ui-back.wav",
+    "category": "ui",
+    "duration": 0.08,
+    "loop": false,
+    "peak": 0.3815,
+    "license": "CC0-1.0"
+  },
+  "ambient-taj": {
+    "file": "audio/environment/ambient-taj.wav",
+    "category": "environment",
+    "duration": 8.0,
+    "loop": true,
+    "peak": 0.1175,
+    "license": "CC0-1.0"
+  },
+  "ambient-hawa": {
+    "file": "audio/environment/ambient-hawa.wav",
+    "category": "environment",
+    "duration": 8.0,
+    "loop": true,
+    "peak": 0.0919,
+    "license": "CC0-1.0"
+  },
+  "ambient-fort": {
+    "file": "audio/environment/ambient-fort.wav",
+    "category": "environment",
+    "duration": 8.0,
+    "loop": true,
+    "peak": 0.075,
+    "license": "CC0-1.0"
+  },
+  "ambient-hampi": {
+    "file": "audio/environment/ambient-hampi.wav",
+    "category": "environment",
+    "duration": 8.0,
+    "loop": true,
+    "peak": 0.0928,
+    "license": "CC0-1.0"
+  },
+  "ambient-gateway": {
+    "file": "audio/environment/ambient-gateway.wav",
+    "category": "environment",
+    "duration": 8.0,
+    "loop": true,
+    "peak": 0.0995,
+    "license": "CC0-1.0"
+  },
+  "ambient-mysore": {
+    "file": "audio/environment/ambient-mysore.wav",
+    "category": "environment",
+    "duration": 8.0,
+    "loop": true,
+    "peak": 0.0814,
+    "license": "CC0-1.0"
+  },
+  "music-menu": {
+    "file": "audio/music/music-menu.wav",
+    "category": "music",
+    "duration": 17.778,
+    "loop": true,
+    "peak": 0.3965,
+    "license": "CC0-1.0"
+  },
+  "music-selection": {
+    "file": "audio/music/music-selection.wav",
+    "category": "music",
+    "duration": 20.0,
+    "loop": true,
+    "peak": 0.3177,
+    "license": "CC0-1.0"
+  },
+  "music-calm": {
+    "file": "audio/music/music-calm.wav",
+    "category": "music",
+    "duration": 17.143,
+    "loop": true,
+    "peak": 0.4152,
+    "license": "CC0-1.0"
+  },
+  "music-medium": {
+    "file": "audio/music/music-medium.wav",
+    "category": "music",
+    "duration": 16.0,
+    "loop": true,
+    "peak": 0.4423,
+    "license": "CC0-1.0"
+  },
+  "music-intense": {
+    "file": "audio/music/music-intense.wav",
+    "category": "music",
+    "duration": 14.545,
+    "loop": true,
+    "peak": 0.4733,
+    "license": "CC0-1.0"
+  },
+  "music-boss": {
+    "file": "audio/music/music-boss.wav",
+    "category": "music",
+    "duration": 13.714,
+    "loop": true,
+    "peak": 0.4811,
+    "license": "CC0-1.0"
+  },
+  "music-suspense": {
+    "file": "audio/music/music-suspense.wav",
+    "category": "music",
+    "duration": 18.113,
+    "loop": true,
+    "peak": 0.3707,
+    "license": "CC0-1.0"
+  },
+  "music-victory": {
+    "file": "audio/music/music-victory.wav",
+    "category": "music",
+    "duration": 16.0,
+    "loop": true,
+    "peak": 0.4025,
+    "license": "CC0-1.0"
+  },
+  "music-defeat": {
+    "file": "audio/music/music-defeat.wav",
+    "category": "music",
+    "duration": 24.0,
+    "loop": true,
+    "peak": 0.2867,
+    "license": "CC0-1.0"
+  },
+  "music-credits": {
+    "file": "audio/music/music-credits.wav",
+    "category": "music",
+    "duration": 19.2,
+    "loop": true,
+    "peak": 0.3353,
+    "license": "CC0-1.0"
+  }
+}

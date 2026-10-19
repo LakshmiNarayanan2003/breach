@@ -1,0 +1,8 @@
+node_modules
+dist
+.npm-cache
+public/audio
+artifacts
+playwright-report
+test-results
+package-lock.json
