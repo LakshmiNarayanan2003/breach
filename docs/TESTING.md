@@ -30,6 +30,8 @@ npx playwright test --config=playwright.browsers.config.ts
 
 Browser tests require the production build. Playwright automatically starts a Vite preview server serving `/breach/`. It prefers the installed `/usr/bin/chromium`; otherwise use `npx playwright install chromium` to obtain the pinned browser. Test failures preserve a trace, error screenshot and HTML report. CI also uploads evidence artifacts.
 
+Linux WebKit/Firefox jobs use a virtual display and a PulseAudio null sink. Firefox's audio initialization remained pending without an output device; with the sink present, the tests require a running AudioContext, loaded assets and no audio errors. This verifies the browser audio pipeline, not physical speaker output. Test failures are also reported as GitHub check annotations.
+
 `artifacts/menu.png`, `artifacts/gameplay.png`, `artifacts/arena-2.png` through `arena-6.png`, and `artifacts/mobile-menu.png` are actual browser captures, not invented visuals. The active-combat screenshot uses a deterministic prepared co-op scene and real weapon input; the other arena screenshots show actual initialized operations.
 
 `artifacts/mobile-gameplay.png` and `artifacts/mobile-landscape.png` show the real touch HUD in prepared Survival scenes. New touch-device saves use Low graphics; saved preferences are preserved. Browser tests check button release/cancellation and rotation to guard against stuck movement or firing. Real iPhone/iPad/Android testing remains necessary for OS gestures, notches, browser chrome, thermal behavior and interruptions such as phone calls.
@@ -44,6 +46,7 @@ Browser tests require the production build. Playwright automatically starts a Vi
 - Returning to the menu discarded labels without disposal: renderer cleanup now disposes unique textures/materials.
 - A blocked boss spawn could omit the required encounter: boss spawns are retried and victory requires an actual boss defeat.
 - Initial test-tool versions had dependency advisories: test/lint dependencies were updated; the audit is repeated in the final run.
+- The combat browser fixture held a stale screen coordinate while the enemy and camera moved. It now tracks the live enemy through real mouse events, retaining the kill deadline and requiring both pistol and hit audio. No enemy health or kill result is injected.
 
 ## What these results do not establish
 

@@ -130,9 +130,23 @@ test('actual combat kills a hostile and emits pistol and hit sounds', async ({ p
   await page.mouse.move(target.x, target.y);
   await page.mouse.down();
   await expect
-    .poll(() => page.evaluate(() => window.__BREACH__.game.kills), { timeout: 25000 })
+    .poll(
+      async () => {
+        // Track the moving hostile as the camera settles, like a player aiming.
+        // A fixed initial screen coordinate can miss indefinitely on slow renderers.
+        const state = await page.evaluate(() => {
+          const { game, world } = window.__BREACH__;
+          const enemy = game.enemies.find((e) => e.hp > 0);
+          return { kills: game.kills, target: enemy ? world.project(enemy) : null };
+        });
+        if (state.target) await page.mouse.move(state.target.x, state.target.y);
+        return state.kills;
+      },
+      { timeout: 25000, intervals: [100] },
+    )
     .toBeGreaterThan(0);
   await page.mouse.up();
+  expect(await page.evaluate(() => window.__BREACH__.audio.history.includes('pistol'))).toBe(true);
   expect(await page.evaluate(() => window.__BREACH__.audio.history.includes('brute-hit'))).toBe(
     true,
   );
