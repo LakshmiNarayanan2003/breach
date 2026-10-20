@@ -16,7 +16,17 @@ async function start(page: Page) {
   await expect(page.locator('#deploy')).toBeVisible({ timeout: 20000 });
   await page.locator('#deploy').click();
   await expect(page.locator('.touch-controls')).toBeVisible();
-  await page.waitForFunction(() => window.__BREACH__.audio.ready);
+  await expect
+    .poll(
+      () =>
+        page.evaluate(() => ({
+          ready: window.__BREACH__.audio.ready,
+          state: window.__BREACH__.audio.ctx?.state,
+          errors: window.__BREACH__.audio.errors,
+        })),
+      { timeout: 20000 },
+    )
+    .toEqual({ ready: true, state: 'running', errors: [] });
   await page.evaluate(() => {
     const g = window.__BREACH__.game;
     g.waveDelay = 1000;

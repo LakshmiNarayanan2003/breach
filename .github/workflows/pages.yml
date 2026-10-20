@@ -53,6 +53,13 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - name: Start audio output for browser playback
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pulseaudio
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=breach_test
+          pactl set-default-sink breach_test
       - run: xvfb-run -a npx playwright test --config=playwright.browsers.config.ts --project=${{ matrix.browser }} --headed
         env:
           LIBGL_ALWAYS_SOFTWARE: '1'
