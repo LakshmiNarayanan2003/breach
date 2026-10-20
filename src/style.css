@@ -78,6 +78,12 @@ svg {
   height: 100dvh;
   pointer-events: none;
 }
+#app.menu {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  pointer-events: auto;
+}
 #app button,
 #app a,
 #app select,
@@ -85,7 +91,7 @@ svg {
   pointer-events: auto;
 }
 .menu-shade {
-  position: absolute;
+  position: fixed;
   inset: 0;
   background:
     linear-gradient(90deg, #111f25 0%, #112128fa 20%, #13252ae6 34%, #15292b35 62%, #14262b00 85%),
@@ -94,6 +100,7 @@ svg {
 }
 .topbar {
   height: 94px;
+  flex-shrink: 0;
   position: relative;
   display: flex;
   align-items: center;
@@ -164,14 +171,12 @@ svg {
 }
 .lobby {
   position: relative;
-  height: calc(100dvh - 352px);
+  flex: 1 0 auto;
+  padding: 32px 4.4% 28px;
   min-height: 460px;
-  max-height: 800px;
 }
 .hero {
-  position: absolute;
-  left: 4.4%;
-  top: 32px;
+  position: relative;
   width: 390px;
 }
 .eyebrow {
@@ -436,11 +441,9 @@ select option {
   margin-right: 6px;
 }
 .arena-deck {
-  position: absolute;
-  left: 4.4%;
-  right: 4.4%;
-  bottom: 62px;
-  height: 174px;
+  position: relative;
+  flex-shrink: 0;
+  margin: 0 4.4% 20px;
 }
 .deck-heading {
   display: flex;
@@ -542,11 +545,10 @@ select option {
   width: 100%;
 }
 footer {
-  position: absolute;
-  left: 4.4%;
-  right: 4.4%;
-  bottom: 0;
-  height: 43px;
+  position: relative;
+  flex-shrink: 0;
+  margin: 0 4.4%;
+  min-height: 43px;
   border-top: 1px solid #92ab9f22;
   display: flex;
   align-items: center;
@@ -1226,9 +1228,6 @@ kbd {
   color: #b0c5b5;
 }
 @media (min-height: 900px) {
-  .hero {
-    top: 55px;
-  }
   .intro {
     margin-bottom: 30px;
   }
@@ -1239,7 +1238,7 @@ kbd {
     margin-top: 20px;
   }
   .lobby {
-    height: calc(100dvh - 355px);
+    padding-top: 55px;
   }
 }
 @media (max-height: 800px) {
@@ -1247,11 +1246,10 @@ kbd {
     height: 72px;
   }
   .lobby {
-    height: calc(100dvh - 285px);
+    padding-top: 23px;
     min-height: 380px;
   }
   .hero {
-    top: 23px;
     width: 350px;
   }
   h1 {
@@ -1278,10 +1276,6 @@ kbd {
   }
   .hero-links {
     margin-top: 9px;
-  }
-  .arena-deck {
-    height: 145px;
-    bottom: 54px;
   }
   .arena-card {
     height: 121px;
@@ -1342,13 +1336,14 @@ kbd {
   .topbar {
     padding: 0 3%;
   }
-  .hero {
-    left: 3%;
+  .lobby {
+    padding-left: 3%;
+    padding-right: 3%;
   }
   .arena-deck,
   footer {
-    left: 3%;
-    right: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
   }
   .arena-card {
     padding: 10px;
@@ -1396,13 +1391,6 @@ kbd {
   }
 }
 @media (max-width: 700px) {
-  body {
-    overflow: auto;
-  }
-  #app {
-    min-height: 100dvh;
-    height: 920px;
-  }
   .menu-shade {
     background:
       linear-gradient(90deg, #112328ed, #1123288c),
@@ -1424,13 +1412,14 @@ kbd {
   .icon-button {
     padding: 5px 10px;
   }
+  .lobby {
+    padding: 30px 24px 28px;
+  }
   .hero {
-    top: 30px;
-    left: 24px;
-    width: calc(100% - 48px);
+    width: 100%;
   }
   h1 {
-    font-size: 96px;
+    font-size: clamp(72px, 24vw, 96px);
   }
   .tagline {
     font-size: 28px;
@@ -1453,13 +1442,11 @@ kbd {
     display: none;
   }
   .arena-deck {
-    left: 24px;
-    right: 24px;
-    bottom: 75px;
-    height: 278px;
+    margin-left: 24px;
+    margin-right: 24px;
   }
   .arena-list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   }
   .arena-card {
     height: 122px;
@@ -1471,9 +1458,9 @@ kbd {
     font-size: 6px;
   }
   footer {
-    height: 56px;
-    left: 24px;
-    right: 24px;
+    min-height: 56px;
+    margin-left: 24px;
+    margin-right: 24px;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;

@@ -81,6 +81,7 @@ function checkpoint() {
 function menu() {
   checkpoint();
   screen = 'menu';
+  app.classList.add('menu');
   game = null;
   paused = false;
   controls.clear();
@@ -95,7 +96,7 @@ function menu() {
   const a = ARENAS[arenaIndex];
   const locked = (mode === 'operations' || mode === 'coop') && !save.unlockedArenas.includes(a.id);
   app.innerHTML = `<div class="menu-shade"></div><header class="topbar"><a class="brand" href="#" aria-label="BREACH home">${logo}<span>BREACH<span class="brand-sub">RESPONSE DIVISION</span></span></a><nav><span class="status"><i></i> SYSTEMS ONLINE</span><button class="icon-button sound-toggle" aria-label="${save.muted ? 'Unmute' : 'Mute'} audio">${save.muted ? '◌' : '◖))'}</button><button class="text-button" id="settings">SETTINGS <span>⚙</span></button></nav></header>
- <main class="lobby"><section class="hero"><div class="eyebrow"><span class="line"></span> INDIA OPERATIONS / SEASON 01</div><h1>BREACH<span class="title-dot">.</span></h1><p class="tagline">Iconic arenas.<br><span>Endless chaos.</span></p><p class="intro">The world is familiar. The threat isn't.<br>${locked ? 'Complete the previous operation to unlock this zone.' : 'Gear up. Hold the line. Close the breach.'}</p><div class="mode-label">CHOOSE YOUR MISSION <span>01 — 04</span></div><div class="mode-grid">${(
+ <main class="lobby"><section class="hero"><div class="eyebrow"><span class="line"></span> INDIA OPERATIONS / SEASON 01</div><h1>BREACH<span class="title-dot">.</span></h1><p class="tagline">Iconic arenas.<br><span>Endless chaos.</span></p><p class="intro">The world is familiar. The threat isn't.<br>${locked ? 'Complete the previous operation to unlock this zone.' : 'Gear up. Hold the line. Close the breach.'}</p><div class="mode-label">CHOOSE YOUR MISSION <span>01 - 04</span></div><div class="mode-grid">${(
    [
      ['survival', 'Survival', 'Endless waves'],
      ['operations', 'Operations', 'Tactical missions'],
@@ -146,6 +147,7 @@ async function start(options?: { arena?: number; mode?: Mode; seed?: number }) {
   if (options?.arena !== undefined) arenaIndex = options.arena;
   if (options?.mode) mode = options.mode;
   screen = 'game';
+  app.classList.remove('menu');
   closeModal();
   game = new Game({
     arena: arenaIndex,
@@ -334,7 +336,7 @@ function settings() {
         '',
       )}</div><label class="checkbox"><input type="checkbox" id="mute-all" ${save.muted ? 'checked' : ''}> Mute all audio</label><p class="fineprint">Original synthesized soundtrack · no streaming · browser audio activates on interaction</p>`;
   if (settingsTab === 'graphics')
-    content = `<div class="settings-group"><label>Rendering quality<select id="graphics"><option value="low" ${save.graphics === 'low' ? 'selected' : ''}>Low — no shadows</option><option value="medium" ${save.graphics === 'medium' ? 'selected' : ''}>Medium — balanced</option><option value="high" ${save.graphics === 'high' ? 'selected' : ''}>High — full resolution</option></select></label><label class="checkbox"><input type="checkbox" id="motion" ${save.reducedMotion ? 'checked' : ''}> Reduce camera motion & explosion shake</label><p class="fineprint">Tip: choose Low if you experience dropped frames. All gameplay and audio remain available.</p></div>`;
+    content = `<div class="settings-group"><label>Rendering quality<select id="graphics"><option value="low" ${save.graphics === 'low' ? 'selected' : ''}>Low - no shadows</option><option value="medium" ${save.graphics === 'medium' ? 'selected' : ''}>Medium - balanced</option><option value="high" ${save.graphics === 'high' ? 'selected' : ''}>High - full resolution</option></select></label><label class="checkbox"><input type="checkbox" id="motion" ${save.reducedMotion ? 'checked' : ''}> Reduce camera motion & explosion shake</label><p class="fineprint">Tip: choose Low if you experience dropped frames. All gameplay and audio remain available.</p></div>`;
   if (settingsTab === 'controls')
     content = `<p class="modal-intro">Select a binding, then press a key. Duplicate and reserved keys are rejected.</p><div class="bindings">${Object.entries(
       save.bindings,
@@ -407,7 +409,7 @@ function credits() {
   void audio.setMusic('credits');
   openModal(
     'Built for the breach',
-    `<p class="modal-intro">An original, open source arcade game.</p><div class="credits-copy"><h3>DESIGN, CODE & PROCEDURAL ART</h3><p>Created for LakshmiNarayanan2003 / BREACH.</p><h3>ORIGINAL SOUNDTRACK & SOUND DESIGN</h3><p>BREACH Synthesis Lab — deterministic original compositions and synthesized effects. All bundled audio is dedicated to the public domain under CC0 1.0. No sampled recordings or third-party music.</p><h3>BUILT WITH</h3><p>Three.js · TypeScript · Vite · Web Audio<br>Original source code: MIT license. See repository for full credits.</p><h3>YOUR DATA STAYS WITH YOU</h3><p>Settings, scores, and achievements are saved in this browser. No accounts, tracking, or gameplay servers.</p></div>`,
+    `<p class="modal-intro">An original, open source arcade game.</p><div class="credits-copy"><h3>DESIGN, CODE & PROCEDURAL ART</h3><p>Created for LakshmiNarayanan2003 / BREACH.</p><h3>ORIGINAL SOUNDTRACK & SOUND DESIGN</h3><p>BREACH Synthesis Lab - deterministic original compositions and synthesized effects. All bundled audio is dedicated to the public domain under CC0 1.0. No sampled recordings or third-party music.</p><h3>BUILT WITH</h3><p>Three.js · TypeScript · Vite · Web Audio<br>Original source code: MIT license. See repository for full credits.</p><h3>YOUR DATA STAYS WITH YOU</h3><p>Settings, scores, and achievements are saved in this browser. No accounts, tracking, or gameplay servers.</p></div>`,
   );
 }
 function characters() {

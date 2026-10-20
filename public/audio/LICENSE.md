@@ -1,4 +1,4 @@
-# Original BREACH audio — CC0 1.0
+# Original BREACH audio - CC0 1.0
 
 All WAV files under this directory, and their original musical compositions, were generated specifically for BREACH by the repository's `scripts/generate_audio.py`. No third-party samples or recordings were used.
 
