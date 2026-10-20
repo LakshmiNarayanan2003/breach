@@ -1,9 +1,19 @@
 import { test, expect, type Page } from '@playwright/test';
 
 test.use({ hasTouch: true, viewport: { width: 390, height: 844 } });
+const pageErrors = new WeakMap<Page, string[]>();
+test.beforeEach(async ({ page }) => {
+  const errors: string[] = [];
+  pageErrors.set(page, errors);
+  page.on('pageerror', (error) => errors.push(error.message));
+});
+test.afterEach(async ({ page }) => {
+  expect(pageErrors.get(page), 'Browser runtime errors').toEqual([]);
+});
 
 async function start(page: Page) {
   await page.goto('?test=1');
+  await expect(page.locator('#deploy')).toBeVisible({ timeout: 20000 });
   await page.locator('#deploy').click();
   await expect(page.locator('.touch-controls')).toBeVisible();
   await page.waitForFunction(() => window.__BREACH__.audio.ready);
