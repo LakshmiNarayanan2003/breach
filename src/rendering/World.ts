@@ -836,7 +836,9 @@ export class World {
     }
     this.camera.left = -height * aspect;
     this.camera.right = height * aspect;
-    const offset = game && this.touchControls && aspect < 1 ? 0.22 : 0;
+    // Keep the response team above the touch HUD, including short landscape screens.
+    const offset =
+      game && this.touchControls ? (aspect < 1 ? 0.22 : this.height <= 600 ? 0.34 : 0) : 0;
     this.camera.top = height * (1 - offset);
     this.camera.bottom = -height * (1 + offset);
     this.camera.near = 0.1;

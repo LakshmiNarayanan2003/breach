@@ -101,6 +101,7 @@ test('mobile controls fit portrait/landscape, dialogs work, and rotation clears 
     [320, 568],
     [390, 844],
     [844, 390],
+    [568, 320],
     [1024, 768],
   ]) {
     await page.setViewportSize({ width, height });
@@ -118,6 +119,16 @@ test('mobile controls fit portrait/landscape, dialogs work, and rotation clears 
       expect(box.y + box.height).toBeLessThanOrEqual(height + 1);
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+    await expect
+      .poll(() =>
+        page.evaluate(() => {
+          const p = window.__BREACH__.world.project(window.__BREACH__.game.players[0]);
+          const top = document.querySelector('.hud-top')!.getBoundingClientRect().bottom;
+          const bottom = document.querySelector('.hud-bottom')!.getBoundingClientRect().top;
+          return Math.min(p.y - top - 15, bottom - p.y - 10);
+        }),
+      )
+      .toBeGreaterThan(0);
     await page.locator('#pause').click();
     await expect(page.getByRole('dialog')).toContainText('Operation paused');
     await page.locator('#resume').click();

@@ -51,6 +51,28 @@ test('real simultaneous touch movement, firing, dash, interaction, cancellation 
   expect(await page.evaluate(() => window.__BREACH__.game.players[0].x)).toBeCloseTo(stopped.x, 2);
   expect(await page.evaluate(() => window.__BREACH__.game.players[0].ammo[1])).toBe(stopped.ammo);
 
+  // Swipe the arsenal without selecting the button underneath the finger.
+  const strip = (await page.locator('.weapon-slots').boundingBox())!;
+  const swipe = async (from: number, to: number) => {
+    const finger = { id: 6, x: from, y: strip.y + strip.height / 2 };
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [finger] });
+    for (let step = 1; step <= 10; step++)
+      await cdp.send('Input.dispatchTouchEvent', {
+        type: 'touchMove',
+        touchPoints: [{ ...finger, x: from + ((to - from) * step) / 10 }],
+      });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  };
+  await swipe(strip.x + strip.width - 25, strip.x + 25);
+  await expect
+    .poll(() => page.locator('.weapon-slots').evaluate((el) => el.scrollLeft))
+    .toBeGreaterThan(40);
+  expect(await page.evaluate(() => window.__BREACH__.game.players[0].weapon)).toBe(1);
+  await swipe(strip.x + 25, strip.x + strip.width - 25);
+  await expect
+    .poll(() => page.locator('.weapon-slots').evaluate((el) => el.scrollLeft))
+    .toBeLessThan(5);
+
   await page.evaluate(() => {
     const g = window.__BREACH__.game,
       p = g.players[0],
