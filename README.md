@@ -4,6 +4,8 @@
 
 An original, free 3D browser arena shooter built with Three.js, TypeScript and Web Audio. Defend landmark-inspired arenas against creatures and machines that have their own missions. Saboteurs attack relays; scavengers steal physical energy cells and escape through portals. Staying alive alone is not enough.
 
+Play at **https://lakshminarayanan2003.github.io/breach/**.
+
 ![BREACH command screen](artifacts/menu.png)
 
 ## Play and develop
@@ -40,6 +42,12 @@ The browser suite uses `/usr/bin/chromium` when available. Otherwise install its
 - Persistent remappable keyboard controls, gamepad input, three graphics presets, reduced camera motion and local versioned saves.
 
 ## Controls
+
+**Phone and tablet:** drag the left thumb stick to move and the right stick to aim/fire. Release the right stick to stop firing. Tap a weapon in the horizontally scrolling strip, then aim/fire to shoot or place equipment. DASH works while moving; hold INTERACT to repair, collect, activate, or revive; DETONATE triggers remote charges. Pause and upgrades have touch buttons. Portrait and landscape are supported; landscape gives a wider view.
+
+Touch controls Player 1. Local co-op and deathmatch need an additional keyboard or gamepad for Player 2; there is no online multiplayer or second touch controller. The first connected gamepad controls Player 2 in local multiplayer.
+
+Use a current browser with WebGL 2 and Web Audio, such as Chrome, Safari, Firefox, Edge, or Samsung Internet. Browser-engine tests are distinct from physical phone testing; see [testing coverage](docs/TESTING.md). New touch-device saves default to Low graphics to reduce GPU load, while existing quality preferences are preserved. Sound starts after a tap. Backgrounding the page pauses gameplay; tap Resume when you return.
 
 | Action                     | Player 1            | Player 2                |
 | -------------------------- | ------------------- | ----------------------- |

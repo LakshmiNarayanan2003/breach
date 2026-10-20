@@ -15,12 +15,23 @@ try {
   world = new World(canvas);
 } catch {
   document.querySelector('#loading')!.innerHTML =
-    '<strong>WebGL is unavailable</strong><p>BREACH requires a desktop browser with hardware acceleration. Enable it in your browser settings and reload.</p>';
+    '<strong>WebGL is unavailable</strong><p>BREACH requires a current browser with WebGL 2 and hardware acceleration. Update your browser, enable hardware acceleration where available, and reload.</p>';
   throw Error('WebGL renderer initialization failed');
 }
 world.setQuality(save.graphics);
 world.reducedMotion = save.reducedMotion;
 const controls = new Controls(save, world);
+document.documentElement.classList.toggle('touch-enabled', controls.touch.enabled);
+world.touchControls = controls.touch.enabled;
+if (controls.touch.enabled) {
+  try {
+    if (!JSON.parse(localStorage.getItem('breach.save.v1') ?? 'null')?.graphics)
+      save.graphics = 'low';
+  } catch {
+    save.graphics = 'low';
+  }
+  world.setQuality(save.graphics);
+}
 let game: Game | null = null,
   paused = false,
   arenaIndex = 0,
@@ -65,6 +76,33 @@ function keyLabel(key: string) {
     .replace('ShiftRight', 'R Shift')
     .replace('Space', 'Space');
 }
+function bindPress(element: HTMLElement, action: () => void) {
+  // A second finger does not reliably synthesize a click while a stick is held.
+  // Handle short touch gestures directly, preserving scroll and keyboard clicks.
+  let start: { id: number; x: number; y: number } | null = null;
+  let lastTouch = -Infinity;
+  element.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'touch')
+      start = { id: event.pointerId, x: event.clientX, y: event.clientY };
+  });
+  element.addEventListener('pointercancel', () => {
+    start = null;
+  });
+  element.addEventListener('pointerup', (event) => {
+    if (event.pointerType !== 'touch') return;
+    lastTouch = performance.now();
+    if (
+      start?.id === event.pointerId &&
+      Math.hypot(event.clientX - start.x, event.clientY - start.y) < 12
+    )
+      action();
+    start = null;
+  });
+  element.addEventListener('click', (event) => {
+    if (event.detail > 0 && performance.now() - lastTouch < 700) return;
+    action();
+  });
+}
 function persist() {
   writeSave(save);
 }
@@ -100,8 +138,8 @@ function menu() {
    [
      ['survival', 'Survival', 'Endless waves'],
      ['operations', 'Operations', 'Tactical missions'],
-     ['coop', 'Local Co-op', 'Two operators'],
-     ['deathmatch', 'Deathmatch', 'First to 5'],
+     ['coop', 'Local Co-op', controls.touch.enabled ? 'P2 needs gamepad' : 'Two operators'],
+     ['deathmatch', 'Deathmatch', controls.touch.enabled ? 'P2 needs gamepad' : 'First to 5'],
    ] as const
  )
    .map(
@@ -110,7 +148,7 @@ function menu() {
    )
    .join(
      '',
-   )}</div><div class="deploy-row"><button class="deploy" id="deploy" ${locked ? 'disabled title="Complete the previous operation to unlock this arena"' : ''}>${locked ? 'LOCKED' : 'DEPLOY'} ${arrow}</button><label class="difficulty">THREAT LEVEL<select id="difficulty" aria-label="Difficulty"><option value="easy" ${difficulty === 'easy' ? 'selected' : ''}>RECRUIT</option><option value="normal" ${difficulty === 'normal' ? 'selected' : ''}>STANDARD</option><option value="hard" ${difficulty === 'hard' ? 'selected' : ''}>VETERAN</option></select></label></div><div class="hero-links"><button id="how-to">HOW TO PLAY <span>↗</span></button><span>/</span><button id="operator">OPERATOR ${String(selectedCharacter + 1).padStart(2, '0')} <i class="swatch c${selectedCharacter}"></i></button></div></section>
+   )}</div><div class="deploy-row"><button class="deploy" id="deploy" ${locked ? 'disabled title="Complete the previous operation to unlock this arena"' : ''}>${locked ? 'LOCKED' : 'DEPLOY'} ${arrow}</button><label class="difficulty">THREAT LEVEL<select id="difficulty" aria-label="Difficulty"><option value="easy" ${difficulty === 'easy' ? 'selected' : ''}>RECRUIT</option><option value="normal" ${difficulty === 'normal' ? 'selected' : ''}>STANDARD</option><option value="hard" ${difficulty === 'hard' ? 'selected' : ''}>VETERAN</option></select></label></div>${controls.touch.enabled ? '<p class="touch-menu-note">Left thumb moves. Right thumb aims & fires.<br>Rotate for a wider view. Touch controls Player 1.</p>' : ''}<div class="hero-links"><button id="how-to">HOW TO PLAY <span>↗</span></button><span>/</span><button id="operator">OPERATOR ${String(selectedCharacter + 1).padStart(2, '0')} <i class="swatch c${selectedCharacter}"></i></button></div></section>
  <aside class="location-card"><div class="location-line"><span class="live-dot"></span> LIVE BREACH ZONE <span class="zone-number">0${arenaIndex + 1}</span></div><h2>${a.name}</h2><p>${a.location}</p><div class="location-bottom"><span>◈ ${a.subtitle}</span><span>3D ARENA</span></div></aside><div class="scene-note"><span class="crosshair-small">+</span> ${arenaIndex === 0 ? '27.1751° N / 78.0421° E' : 'RESPONSE SATELLITE / FEED 0' + (arenaIndex + 1)}<br><span class="scene-note-sub">LIVE ENVIRONMENT RENDER</span></div></main>
  <section class="arena-deck" aria-label="Arena selection"><div class="deck-heading"><span>SELECT DROP ZONE <b>06</b></span><span>ONE COUNTRY. SIX FRONTLINES.</span></div><div class="arena-list">${ARENAS.map((a, i) => `<button class="arena-card ${i === arenaIndex ? 'active' : ''}" data-arena="${i}" aria-pressed="${i === arenaIndex}"><span class="arena-top"><span>0${i + 1}</span>${save.completed.includes(a.id) ? '<span class="completed-check">✓ CONTAINED</span>' : i === arenaIndex ? '<span class="card-live">● ACTIVE</span>' : '<span>↗</span>'}</span>${glyph(i)}<strong>${a.name}</strong><span class="arena-city">${a.location.split(' · ')[0]}</span><span class="card-bar"></span></button>`).join('')}</div></section>
  <footer><span>© BREACH / AN ORIGINAL ARCADE EXPERIENCE</span><div><span class="audio-indicator">${audio.unlocked ? 'AUDIO ONLINE' : 'CLICK TO ENABLE AUDIO'}</span><button id="records">SERVICE RECORD</button><button id="credits">CREDITS</button><span class="version">V1.0</span></div></footer>`;
@@ -175,11 +213,34 @@ async function start(options?: { arena?: number; mode?: Mode; seed?: number }) {
 }
 function hud() {
   app.innerHTML = `<div class="hud"><div class="hud-top"><div class="mission-panel"><div class="mini-brand">${logo}<span>${ARENAS[arenaIndex].subtitle}</span></div><h3 id="mission-title">${mode === 'deathmatch' ? 'LOCAL DEATHMATCH' : mode === 'survival' ? 'HOLD THE LINE' : 'CONTAIN THE BREACH'}</h3><p id="mission-copy">${mode === 'deathmatch' ? 'First to 5 eliminations · friendly fire enabled' : mode === 'survival' ? 'Survive the incursion. Clear waves to earn upgrades.' : ARENAS[arenaIndex].mission}</p><div id="objectives"></div></div><div class="wave-panel"><span id="wave-label">INCOMING</span><strong id="wave-value">01</strong><span id="hostiles">BREACH DETECTED</span></div><div class="tactical-panel"><div class="score-line"><span>SCORE</span><strong id="score">0</strong><button id="pause" aria-label="Pause game">Ⅱ</button></div><canvas id="minimap" width="160" height="150" aria-label="Tactical map"></canvas><span id="fps">60 FPS</span></div></div><div id="boss-bar"></div><div class="mission-alert" id="alert"></div><div class="crosshair" id="crosshair">+</div><div class="hud-bottom"><div class="players-panel" id="players"></div><div class="arsenal"><div class="weapon-detail"><span id="weapon-title"></span><span id="ammo"></span></div><div class="weapon-slots">${WEAPONS.map((w, i) => `<button data-weapon="${i}" ${game?.unlockedWeapons.has(i) ? '' : 'disabled'} title="${w.name}: ${w.description}" aria-label="Select ${w.name}"><span>${(i + 1) % 10}</span><b>${w.short}</b><i></i></button>`).join('')}</div><div class="control-strip"><span><kbd>W A S D</kbd> MOVE</span><span><kbd>SHIFT</kbd> DASH</span><span><kbd>F</kbd> INTERACT / REVIVE</span><span><kbd>R</kbd> DETONATE</span></div></div><div class="upgrade-panel"><button id="upgrade-button">UPGRADE <span id="credits-count">1</span></button><span>ESC / P TO PAUSE</span></div></div></div>`;
-  document.querySelector('#pause')!.addEventListener('click', pause);
-  document.querySelector('#upgrade-button')!.addEventListener('click', () => upgrades());
+  bindPress(document.querySelector<HTMLElement>('#pause')!, pause);
+  if (controls.touch.enabled) {
+    app.querySelector('.hud')!.insertAdjacentHTML(
+      'beforeend',
+      `
+      <div class="touch-controls" aria-label="Touch gameplay controls">
+        <div class="touch-actions">
+          <button data-touch-action="dash" aria-label="Dash">DASH</button>
+          <button data-touch-action="interact" aria-label="Hold to interact or revive">INTERACT</button>
+          <button data-touch-action="detonate" aria-label="Detonate remote charges">DETONATE</button>
+        </div>
+        <div class="touch-stick move-stick" data-stick="move" role="group" aria-label="Movement joystick">
+          <span>MOVE</span><i></i>
+        </div>
+        <div class="touch-stick aim-stick" data-stick="aim" role="group" aria-label="Aim and fire joystick">
+          <span>AIM + FIRE</span><i></i>
+        </div>
+      </div>`,
+    );
+    controls.touch.bind(
+      app,
+      () => !!game && game.status === 'playing' && !paused && !modalRoot.children.length,
+    );
+  }
+  bindPress(document.querySelector<HTMLElement>('#upgrade-button')!, () => upgrades());
   app
     .querySelectorAll<HTMLButtonElement>('[data-weapon]')
-    .forEach((b) => (b.onclick = () => game?.switchWeapon(0, Number(b.dataset.weapon))));
+    .forEach((b) => bindPress(b, () => game?.switchWeapon(0, Number(b.dataset.weapon))));
   updateHud();
 }
 function updateHud() {
@@ -268,6 +329,7 @@ function drawMap(g: Game) {
   }
 }
 function openModal(title: string, content: string, wide = false) {
+  controls.clear();
   modalReturn = document.activeElement as HTMLElement;
   modalRoot.innerHTML = `<div class="modal-shade"><section class="modal ${wide ? 'wide' : ''}" role="dialog" aria-modal="true" aria-label="${title}"><header><div><span class="eyebrow">BREACH / RESPONSE SYSTEMS</span><h2>${title}</h2></div><button class="close-modal" aria-label="Close dialog">×</button></header>${content}</section></div>`;
   modalRoot.querySelector('.close-modal')!.addEventListener('click', () => {
@@ -395,7 +457,7 @@ function settings() {
 function help() {
   openModal(
     'Field manual',
-    `<div class="help-grid"><section><h3>01 / MOVE & FIGHT</h3><p>Move with <kbd>WASD</kbd>, aim with your mouse, and fire with a click or <kbd>Space</kbd>. Dash with <kbd>Shift</kbd> to evade incoming fire.</p><h3>02 / BUILD YOUR DEFENSE</h3><p><kbd>Q/E</kbd> or <kbd>1–0</kbd> switch weapons. Fire to deploy equipment. Shoot barrels for chain reactions; <kbd>R</kbd> detonates remote charges. Explosives can hurt you.</p><h3>03 / PROTECT THE MISSION</h3><p>Orange saboteurs attack relays. Cyan scavengers steal cells and escape through portals. Hold <kbd>F</kbd> near cells to secure them, near relays to repair them, or near a downed teammate to revive.</p></section><section><h3>04 / LOCAL MULTIPLAYER</h3><p>P2 moves and aims with arrow keys. <kbd>${keyLabel(save.bindings.p2fire)}</kbd> fires, <kbd>${keyLabel(save.bindings.p2next)}</kbd> switches weapons, <kbd>Enter</kbd> interacts, right <kbd>Shift</kbd> dashes. All keys can be remapped in Settings.</p><h3>05 / GET STRONGER</h3><p>Clear waves to earn upgrade points. Use UPGRADE to improve weapons. Collect glowing pickups for healing, ammunition, shields, and temporary combat boosts.</p><h3>06 / WIN THE OPERATION</h3><p>Operations last 4 waves including a boss. Keep every relay intact and stop 4 extractions. Hawa: secure 5 cells. Hampi: activate 3 transmitters. Harbor: secure 5 cells and escort the drone. Survival continues endlessly.</p></section></div><p class="fineprint">Desktop keyboard/mouse or gamepad recommended. Progress saves locally in this browser. All six arenas and all equipment are available in Survival and Deathmatch. Operations unlock campaign zones and requisition one new weapon each wave.</p>`,
+    `<div class="help-grid"><section><h3>TOUCH / PHONE & TABLET</h3><p>Drag the left stick to move. Drag the right stick to aim and fire; release to stop. Tap a weapon in the scrolling weapon strip, then use the right stick to fire or place it. Hold INTERACT to repair, collect, activate, or revive. DASH works while moving; DETONATE triggers remote charges. Pause and upgrades are touch buttons. Rotate for a wider view.</p><h3>01 / MOVE & FIGHT</h3><p>Move with <kbd>WASD</kbd>, aim with your mouse, and fire with a click or <kbd>Space</kbd>. Dash with <kbd>Shift</kbd> to evade incoming fire.</p><h3>02 / BUILD YOUR DEFENSE</h3><p><kbd>Q/E</kbd> or <kbd>1–0</kbd> switch weapons. Fire to deploy equipment. Shoot barrels for chain reactions; <kbd>R</kbd> detonates remote charges. Explosives can hurt you.</p><h3>03 / PROTECT THE MISSION</h3><p>Orange saboteurs attack relays. Cyan scavengers steal cells and escape through portals. Hold <kbd>F</kbd> near cells to secure them, near relays to repair them, or near a downed teammate to revive.</p></section><section><h3>04 / LOCAL MULTIPLAYER</h3><p>P2 moves and aims with arrow keys. <kbd>${keyLabel(save.bindings.p2fire)}</kbd> fires, <kbd>${keyLabel(save.bindings.p2next)}</kbd> switches weapons, <kbd>Enter</kbd> interacts, right <kbd>Shift</kbd> dashes. All keys can be remapped in Settings.</p><h3>05 / GET STRONGER</h3><p>Clear waves to earn upgrade points. Use UPGRADE to improve weapons. Collect glowing pickups for healing, ammunition, shields, and temporary combat boosts.</p><h3>06 / WIN THE OPERATION</h3><p>Operations last 4 waves including a boss. Keep every relay intact and stop 4 extractions. Hawa: secure 5 cells. Hampi: activate 3 transmitters. Harbor: secure 5 cells and escort the drone. Survival continues endlessly.</p></section></div><p class="fineprint">Touch supports single-player in portrait or landscape. Local multiplayer needs a keyboard or gamepad for Player 2; the first gamepad controls Player 2. Progress saves locally in this browser. All six arenas and all equipment are available in Survival and Deathmatch. Operations unlock campaign zones and requisition one new weapon each wave.</p>`,
     true,
   );
 }
@@ -534,7 +596,7 @@ window.addEventListener('keydown', (e) => {
 });
 let unlocking = false;
 async function ensureAudio() {
-  if (unlocking || audio.ready) return;
+  if (unlocking || (audio.ready && audio.ctx?.state === 'running')) return;
   unlocking = true;
   await audio.unlock();
   unlocking = false;
@@ -549,7 +611,20 @@ document.addEventListener('keydown', () => void ensureAudio(), { once: true });
 document.addEventListener('click', (e) => {
   if ((e.target as HTMLElement).closest('button')) void audio.play('ui-click', undefined, 1);
 });
-window.addEventListener('resize', () => world.resize());
+window.addEventListener('resize', () => {
+  controls.clear();
+  world.resize();
+});
+window.visualViewport?.addEventListener('resize', () => {
+  controls.clear();
+  world.resize();
+});
+window.addEventListener('pagehide', () => {
+  controls.clear();
+  if (game?.status === 'playing' && !paused) pause();
+  void audio.visibility(true);
+});
+window.addEventListener('pageshow', () => void audio.visibility(document.hidden));
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && game?.status === 'playing' && !paused) pause();
   controls.clear();

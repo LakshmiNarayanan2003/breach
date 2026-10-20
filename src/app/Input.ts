@@ -1,7 +1,9 @@
 import { idleInput, type Game, type Input } from '../core/game';
 import type { Save } from '../core/save';
 import type { World } from '../rendering/World';
+import { TouchControls } from './TouchControls';
 export class Controls {
+  touch = new TouchControls();
   keys = new Set<string>();
   buffered = new Map<string, number>();
   mouseUntil = 0;
@@ -31,6 +33,7 @@ export class Controls {
     this.buffered.set(code, 0.18);
   }
   clear() {
+    this.touch.clear();
     this.keys.clear();
     this.buffered.clear();
     this.mouseUntil = 0;
@@ -59,6 +62,29 @@ export class Controls {
       } else {
         const aim = this.world.aim(this.mouse.x, this.mouse.y);
         input.aim = { x: aim.x - p.x, z: aim.z - p.z };
+        if (this.touch.enabled) {
+          // Project screen-space thumb directions onto the arena floor.
+          const origin = this.world.aim(innerWidth / 2, innerHeight / 2);
+          const direction = (vector: { x: number; y: number }) => {
+            const point = this.world.aim(
+              innerWidth / 2 + vector.x * 100,
+              innerHeight / 2 + vector.y * 100,
+            );
+            const dx = point.x - origin.x,
+              dz = point.z - origin.z;
+            const length = Math.hypot(dx, dz) || 1;
+            const strength = Math.min(1, Math.hypot(vector.x, vector.y));
+            return { x: (dx / length) * strength, z: (dz / length) * strength };
+          };
+          const move = direction(this.touch.move);
+          input.x += move.x;
+          input.z += move.z;
+          input.aim = direction(this.touch.aim);
+          input.fire ||= this.touch.firing;
+          input.dash ||= this.touch.action('dash');
+          input.interact ||= this.touch.action('interact');
+          input.detonate ||= this.touch.action('detonate');
+        }
       }
       return input;
     });
@@ -88,6 +114,7 @@ export class Controls {
       else this.buffered.set(key, value - 1 / 60);
     }
     this.mouseUntil = Math.max(0, this.mouseUntil - 1 / 60);
+    this.touch.advance();
     for (const p of game.players) {
       if (inputs[p.id].fire && p.cooldown <= 0) {
         this.buffered.delete(b[p.id ? 'p2fire' : 'fire']);

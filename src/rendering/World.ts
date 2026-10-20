@@ -291,6 +291,7 @@ export class World {
   renderer: T.WebGLRenderer;
   scene = new T.Scene();
   camera = new T.OrthographicCamera();
+  touchControls = false;
   root = new T.Group();
   entities = new T.Group();
   effects = new T.Group();
@@ -812,11 +813,15 @@ export class World {
       const living = game.players.filter((p) => p.hp > 0);
       const players = living.length ? living : game.players;
       desired.set(
-        (players.reduce((s, p) => s + p.x, 0) / players.length) * 0.16,
+        (players.reduce((s, p) => s + p.x, 0) / players.length) * (this.touchControls ? 1 : 0.16),
         0,
-        (players.reduce((s, p) => s + p.z, 0) / players.length) * 0.12 + 1,
+        (players.reduce((s, p) => s + p.z, 0) / players.length) * (this.touchControls ? 1 : 0.12) +
+          1,
       );
-      height = Math.max(23, 24 / aspect);
+      height =
+        this.touchControls && players.length === 1
+          ? Math.max(13, 11 / aspect)
+          : Math.max(23, 24 / aspect);
       this.target.lerp(desired, 1 - Math.exp(-dt * 4));
       this.camera.position.set(this.target.x, 40, this.target.z + 31);
     } else {
@@ -831,8 +836,9 @@ export class World {
     }
     this.camera.left = -height * aspect;
     this.camera.right = height * aspect;
-    this.camera.top = height;
-    this.camera.bottom = -height;
+    const offset = game && this.touchControls && aspect < 1 ? 0.22 : 0;
+    this.camera.top = height * (1 - offset);
+    this.camera.bottom = -height * (1 + offset);
     this.camera.near = 0.1;
     this.camera.far = 200;
     this.camera.lookAt(this.target);
